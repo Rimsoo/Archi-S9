@@ -8,12 +8,12 @@ const aeroports = [
     {name : "DTW", ville : "Detroit"}
 ]
 const vols = [
-    {depart : "JFK", arrivee : "CDG", prix : "1000", places : "1000"},
-    {depart : "CDG", arrivee : "DTW", prix : "700", places : "700"},
-    {depart : "DTW", arrivee : "JFK", prix : "300", places : "300"},
-    {depart : "CDG", arrivee : "JFK", prix : "1000", places : "1000"},
-    {depart : "DTW", arrivee : "CDG", prix : "700", places : "700"},
-    {depart : "JFK", arrivee : "DTW", prix : "300", places : "300"},
+    {depart : 1, arrivee : 0, prix : "1000", places : "1000"},
+    {depart : 0, arrivee : 2, prix : "700", places : "700"},
+    {depart : 2, arrivee : 1, prix : "300", places : "300"},
+    {depart : 0, arrivee : 1, prix : "1000", places : "1000"},
+    {depart : 2, arrivee : 0, prix : "700", places : "700"},
+    {depart : 1, arrivee : 2, prix : "300", places : "300"},
 ]
 const voyages = [
     { id_passager: 0, id_utilisateur : 0, id_billet: [0,1] },
@@ -76,12 +76,26 @@ app.get('/vols', (req,res) => {
     res.status(200).json(vols)
 })
 
-app.get('/vols/:dep/:arr', (req,res) => {
-    var results = vols.filter(v => v.depart === req.params.dep && v.arrivee === req.params.arr)
+app.get('/vols/id/:dep/:arr', (req,res) => {
+    var results = vols.filter(v => v.depart === parseInt(req.params.dep) && v.arrivee === parseInt(req.params.arr))
     vols.forEach(d => {
-        if (d.depart === req.params.dep && d.arrivee !== req.params.arr) {
+        if (d.depart === parseInt(req.params.dep) && d.arrivee !== parseInt(req.params.arr)) {
             vols.forEach(a => {
-                if(a.arrivee === req.params.arr && a.depart === d.arrivee) {
+                if(a.arrivee === parseInt(req.params.arr) && a.depart === d.arrivee) {
+                    results.push([d, a]);
+                }
+            });
+        }
+    });
+    res.status(200).json(results)
+})
+
+app.get('/vols/name/:dep/:arr', (req,res) => {
+    var results = vols.filter(v => aeroports[v.depart].name === req.params.dep && aeroports[v.arrivee].name === req.params.arr)
+    vols.forEach(d => {
+        if (aeroports[d.depart].name === req.params.dep && aeroports[d.arrivee].name !== req.params.arr) {
+            vols.forEach(a => {
+                if(aeroports[a.arrivee].name === req.params.arr && a.depart === d.arrivee) {
                     results.push([d, a]);
                 }
             });
