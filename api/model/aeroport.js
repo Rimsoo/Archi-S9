@@ -1,11 +1,13 @@
 export class Aeroport 
 {
-	name;
-	ville;
+	id
+	name
+	ville
 
-	constructor (name, ville)
+	constructor( name, ville, id = undefined)
 	{
-		this.name = name;
-		this.ville = ville;
+		this.id = id
+		this.name = name
+		this.ville = ville
 	}
 }

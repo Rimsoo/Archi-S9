@@ -1,11 +1,13 @@
 export class Passager 
 {
-	nom;
-	prenom;
+	id
+	nom
+	prenom
 	
-	constructor (nom, prenom)
+	constructor( nom, prenom, id = undefined)
 	{
-		this.nom = nom;
-		this.prenom = prenom;
+		this.id = id
+		this.nom = nom
+		this.prenom = prenom
 	}
 }
