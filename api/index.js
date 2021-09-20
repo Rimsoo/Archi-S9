@@ -16,28 +16,16 @@ const vols = [
     {depart : "JFK", arrivee : "DTW", prix : "300", places : "300"},
 ]
 const voyages = [
-    {
-        id_passager: 0,
-        id_utilisateur : 0,
-        id_billet: [0,1]
-    },
-    {
-        id_passager: 2,
-        id_utilisateur : 0,
-        id_billet: [0,1]
-    },
-    {
-        id_passager: 3,
-        id_utilisateur : 0,
-        id_billet: [0,1]
-    },
-    {
-        id_passager: 1,
-        id_utilisateur : 1,
-        id_billet: [2]
-    }
+    { id_passager: 0, id_utilisateur : 0, id_billet: [0,1] },
+    { id_passager: 1, id_utilisateur : 0, id_billet: [2,3] },
+    { id_passager: 2, id_utilisateur : 0, id_billet: [4,5] },
+    { id_passager: 3, id_utilisateur : 1, id_billet: [6] },
 ]
 const billets = [
+    {id_vol: 0, date : "10-10-2019", class : 1},
+    {id_vol: 1, date : "10-10-2019", class : 2},
+    {id_vol: 0, date : "10-10-2019", class : 1},
+    {id_vol: 1, date : "10-10-2019", class : 2},
     {id_vol: 0, date : "10-10-2019", class : 1},
     {id_vol: 1, date : "10-10-2019", class : 2},
     {id_vol: 3, date : "11-10-2019", class : 1},
@@ -86,6 +74,20 @@ app.post('/voyage', (req, res) => {
 
 app.get('/vols', (req,res) => {
     res.status(200).json(vols)
+})
+
+app.get('/vols/:dep/:arr', (req,res) => {
+    var results = vols.filter(v => v.depart === req.params.dep && v.arrivee === req.params.arr)
+    vols.forEach(d => {
+        if (d.depart === req.params.dep && d.arrivee !== req.params.arr) {
+            vols.forEach(a => {
+                if(a.arrivee === req.params.arr && a.depart === d.arrivee) {
+                    results.push([d, a]);
+                }
+            });
+        }
+    });
+    res.status(200).json(results)
 })
 
 app.get('/passagers', (req, res) =>
