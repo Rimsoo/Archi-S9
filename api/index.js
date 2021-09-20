@@ -1,44 +1,54 @@
-const express = require('express')
+import {
+    Aeroport,
+    Billet,
+    Passager,
+    Reservation,
+    User,
+    Vol,
+} from "./model/index.js"
+
+import express from 'express';
+
 const app = express()
 app.use(express.json())
 
 const aeroports = [
-    {name : "CDG", ville : "Paris"},
-    {name : "JFK", ville : "New York"},
-    {name : "DTW", ville : "Detroit"}
+    new Aeroport("CDG", "Paris"),
+    new Aeroport("JFK", "New York"),
+    new Aeroport("DTW", "Detroit")
 ]
 const vols = [
-    {depart : 1, arrivee : 0, prix : "1000", places : "1000"},
-    {depart : 0, arrivee : 2, prix : "700", places : "700"},
-    {depart : 2, arrivee : 1, prix : "300", places : "300"},
-    {depart : 0, arrivee : 1, prix : "1000", places : "1000"},
-    {depart : 2, arrivee : 0, prix : "700", places : "700"},
-    {depart : 1, arrivee : 2, prix : "300", places : "300"},
+    new Vol(1, 0, "1000", "1000"),
+    new Vol(0, 2, "700", "700"),
+    new Vol(2, 1, "300", "300"),
+    new Vol(0, 1, "1000", "1000"),
+    new Vol(2, 0, "700", "700"),
+    new Vol(1, 2, "300", "300"),
 ]
-const voyages = [
-    { id_passager: 0, id_utilisateur : 0, id_billet: [0,1] },
-    { id_passager: 1, id_utilisateur : 0, id_billet: [2,3] },
-    { id_passager: 2, id_utilisateur : 0, id_billet: [4,5] },
-    { id_passager: 3, id_utilisateur : 1, id_billet: [6] },
+const reservation = [
+    new Reservation(0, 0),
+    new Reservation(1, 0),
+    new Reservation(2, 0),
+    new Reservation(3, 1),
 ]
 const billets = [
-    {id_vol: 0, date : "10-10-2019", class : 1},
-    {id_vol: 1, date : "10-10-2019", class : 2},
-    {id_vol: 0, date : "10-10-2019", class : 1},
-    {id_vol: 1, date : "10-10-2019", class : 2},
-    {id_vol: 0, date : "10-10-2019", class : 1},
-    {id_vol: 1, date : "10-10-2019", class : 2},
-    {id_vol: 3, date : "11-10-2019", class : 1},
+    new Billet(0, "10-10-2019", 1,0),
+    new Billet(1, "10-10-2019", 2, 0),
+    new Billet(0, "10-10-2019", 1, 1),
+    new Billet(1, "10-10-2019", 2, 1),
+    new Billet(0, "10-10-2019", 1, 2),
+    new Billet(1, "10-10-2019", 2, 2),
+    new Billet(3, "11-10-2019", 1, 3),
 ]
 const passagers = [
-    {nom : "toto", prenom : "tata"},
-    {nom : "test", prenom : "toast"},
-    {nom : "Pass", prenom : "un"},
-    {nom : "Poiass", prenom : "deux"},
+    new Passager("toto", "tata"),
+    new Passager("test", "toast"),
+    new Passager("Pass", "un"),
+    new Passager("Poiass", "deux"),
 ]
 const users = [
-    {pseudo: "pouet", email :"oiuet@pouet.com", passwod : "********"},
-    {pseudo: "patate", email :"patate@pouet.com", passwod : "********"}
+    new User("pouet", "oiuet@pouet.com", "********"),
+    new User("patate", "patate@pouet.com", "********")
 ]
 
 app.get('/aeroports', (req,res) => {
@@ -60,16 +70,16 @@ app.post('/billet', (req, res) => {
 })
 
 app.get('/voyages', (req,res) => {
-    res.status(200).json(voyages)
+    res.status(200).json(reservation)
 })
 
 app.get('/voyage/:id', (req,res) => {
-    res.status(200).json(voyages[parseInt(req.params.id)])
+    res.status(200).json(reservation[parseInt(req.params.id)])
 })
 
 app.post('/voyage', (req, res) => {
-    voyages.push(req.body)
-    res.status(200).json(voyages)
+    reservation.push(req.body)
+    res.status(200).json(reservation)
 })
 
 app.get('/vols', (req,res) => {
