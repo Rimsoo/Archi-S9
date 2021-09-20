@@ -15,14 +15,38 @@ const vols = [
     {depart : "DTW", arrivee : "CDG", prix : "700", places : "700"},
     {depart : "JFK", arrivee : "DTW", prix : "300", places : "300"},
 ]
+const voyages = [
+    {
+        id_passager: 0,
+        id_utilisateur : 0,
+        id_billet: [0,1]
+    },
+    {
+        id_passager: 2,
+        id_utilisateur : 0,
+        id_billet: [0,1]
+    },
+    {
+        id_passager: 3,
+        id_utilisateur : 0,
+        id_billet: [0,1]
+    },
+    {
+        id_passager: 1,
+        id_utilisateur : 1,
+        id_billet: [2]
+    }
+]
 const billets = [
-    {id_passager: 0, id_vol: 1, id_utilisateur : 0, date : "10-10-2019", class : 1},
-    {id_passager: 1, id_vol: 1, id_utilisateur : 0, date : "10-10-2019", class : 1},
-    {id_passager: 1, id_vol: 3, id_utilisateur : 1, date : "11-10-2019", class : 1},
+    {id_vol: 0, date : "10-10-2019", class : 1},
+    {id_vol: 1, date : "10-10-2019", class : 2},
+    {id_vol: 3, date : "11-10-2019", class : 1},
 ]
 const passagers = [
     {nom : "toto", prenom : "tata"},
-    {nom : "test", prenom : "icule"},
+    {nom : "test", prenom : "toast"},
+    {nom : "Pass", prenom : "un"},
+    {nom : "Poiass", prenom : "deux"},
 ]
 const users = [
     {pseudo: "pouet", email :"oiuet@pouet.com", passwod : "********"},
@@ -45,6 +69,19 @@ app.get('/billets', (req,res) => {
 app.post('/billet', (req, res) => {
     billets.push(req.body)
     res.status(200).json(billets)
+})
+
+app.get('/voyages', (req,res) => {
+    res.status(200).json(voyages)
+})
+
+app.get('/voyage/:id', (req,res) => {
+    res.status(200).json(voyages[parseInt(req.params.id)])
+})
+
+app.post('/voyage', (req, res) => {
+    voyages.push(req.body)
+    res.status(200).json(voyages)
 })
 
 app.get('/vols', (req,res) => {
