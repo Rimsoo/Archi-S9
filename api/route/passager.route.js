@@ -1,5 +1,6 @@
 import  express  from 'express'
 import {PassagerController} from '../controller/passager.controller.js'
+import { Passager } from '../model/passager.js'
 
 const PassagerRoute = express()
 
@@ -32,16 +33,21 @@ PassagerRoute.get('/get/:id', (req, res) =>
     res.status(200).json(result)
 })
 
-PassagerRoute.get('/reservation/:id/:date', (req, res) =>
-{
-    const result = billets.filter(b => b.id_vol === parseInt(req.params.id) && b.date === req.params.date)
-    res.status(200).json(result)
-})
-
 PassagerRoute.post('/add', (req, res) =>
 {
-    passagers.push(req.body)
-    res.status(200).json(passagers)
+    const nom = req.body.nom
+    const prenom = req.body.prenom
+	
+    if (!nom || !prenom ) {
+        res.status(403).send("Invalid Passager Informations")
+        return
+    }
+
+    const ctl = new PassagerController()
+    const billet = new Passager(nom, prenom)
+    ctl.addPassager(billet)
+
+    res.status(200).json(ctl.getAll())
 })
 
 export {PassagerRoute}

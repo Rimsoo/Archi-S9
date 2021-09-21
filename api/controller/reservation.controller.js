@@ -1,4 +1,5 @@
 import {Reservation} from '../model/reservation.js'
+import { BilletController } from './billet.controller.js';
 
 export class ReservationController 
 {
@@ -17,6 +18,16 @@ export class ReservationController
 	getReservation(id)
 	{
 		return ReservationController.reservation[id]
+	}
+
+	getUserReservation(id_user)
+	{
+		const res = ReservationController.reservation.filter(r => r.id_utilisateur === id_user)
+		res.forEach(r =>{
+			r.billets = BilletController.billets.filter(b => b.id_reservation === ReservationController.reservation.indexOf(r))
+		})
+		
+		return res;
 	}
 
 	addReservation(reservation)

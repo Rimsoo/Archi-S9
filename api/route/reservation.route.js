@@ -31,6 +31,23 @@ ReservationRoute.get('/get/:id', (req,res) => {
     res.status(200).json(result)
 })
 
+ReservationRoute.get('/user/:id/', (req, res) =>
+{
+    const id_user = parseInt(req.params.id)
+    if (id_user === undefined) {
+        res.status(403).send("Invalid User Id")
+        return
+    }
+
+    const ctl = new ReservationController()
+    const results = ctl.getUserReservation(id_user)
+    if (!results) {
+        res.status(404).send("No Reservation Found")
+        return
+    }
+    res.status(200).json(results)
+})
+
 ReservationRoute.post('/add', (req, res) => {
     const id_passager = req.body.id_passager
     const id_utilisateur = req.body.id_utilisateur

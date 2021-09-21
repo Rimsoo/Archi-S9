@@ -19,5 +19,8 @@ export class PassagerController
 		return PassagerController.passagers[id]
 	}
 
-	getReservation() {}
+	addPassager(passager)
+	{
+		PassagerController.passagers.push(passager)
+	}
 }
