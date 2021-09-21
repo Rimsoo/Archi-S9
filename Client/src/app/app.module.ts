@@ -15,6 +15,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from "@angular/material/core";
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
+import {MatStepperModule} from '@angular/material/stepper';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import {MatCardModule} from '@angular/material/card';
     AppComponent,
     MenuComponent,
     AchatBilletComponent,
-    ReservationsComponent
+    ReservationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +35,8 @@ import {MatCardModule} from '@angular/material/card';
     MatDatepickerModule,
     MatNativeDateModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatStepperModule
   ],
   providers: [],
   bootstrap: [AppComponent]

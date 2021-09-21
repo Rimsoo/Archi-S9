@@ -32,16 +32,6 @@
   </div>
   <div class="bloc">
     <mat-form-field appearance="fill">
-      <mat-label>Passagers</mat-label>
-      <mat-select name="food">
-        <mat-option *ngFor="let passager of Passagers" [value]="passager.value">
-          {{passager.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="bloc">
-    <mat-form-field appearance="fill">
       <mat-label>Cabine</mat-label>
       <mat-select name="food">
         <mat-option *ngFor="let cabine of Cabine" [value]="cabine.value">
@@ -57,20 +47,27 @@
   <div class="bloc-b">
     <mat-card class="example-card">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+        <mat-card-title>Vol 1</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p>
-          The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-          A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-          bred for hunting.
-        </p>
+        <mat-stepper orientation="vertical">
+          <mat-step>
+            <ng-template matStepLabel>Départ</ng-template>
+            <ng-template matStepContent>
+              <p>Description du vol</p>
+            </ng-template>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Arrivée</ng-template>
+          </mat-step>
+        </mat-stepper>
+
       </mat-card-content>
       <mat-card-actions>
+        <!--
         <button mat-button>LIKE</button>
         <button mat-button>SHARE</button>
+        -->
       </mat-card-actions>
     </mat-card>
 

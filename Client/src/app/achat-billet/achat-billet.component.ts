@@ -31,7 +31,6 @@ export class AchatBilletComponent implements OnInit {
 
   Cabine: Cabine[] = [
     {value: 'Economy', viewValue: 'Economy'},
-    {value: 'Premium Economy', viewValue: 'Premium Economy'},
     {value: 'Business', viewValue: 'Business'}
   ];
 
