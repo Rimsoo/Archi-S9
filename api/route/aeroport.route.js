@@ -12,7 +12,7 @@ AeroportRoute.get('/getAll', (req,res) => {
 	res.status(200).json(result)
 })
 
-AeroportRoute.get('/getbyname/:name', (req,res) => {
+AeroportRoute.get('/get/name/:name', (req,res) => {
     const name = req.params.name
     if (!name) {
         res.status(403).send("Invalid Name")
@@ -29,7 +29,7 @@ AeroportRoute.get('/getbyname/:name', (req,res) => {
     res.status(200).json(ae)
 })
 
-AeroportRoute.get('/getbyid/:id', (req,res) => {
+AeroportRoute.get('/get/id/:id', (req,res) => {
     const id = parseInt(req.params.id)
     if (id === undefined) {
         res.status(403).send("Invalid Id")

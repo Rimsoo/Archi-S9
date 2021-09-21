@@ -1,36 +1,54 @@
 import  express  from 'express'
+import { VolController } from '../controller/vol.controller.js'
+
 const VolRoute = express()
 
 VolRoute.get('/getall', (req,res) => {
-    res.status(200).json(vols)
+    const ctl = new VolController()
+	const result = ctl.getAll()
+    if (!result) {
+		res.status(500).send("Internal Error")
+        return
+	}
+	res.status(200).json(result)
 })
 
 VolRoute.get('/id/:dep/:arr', (req,res) => {
-    var results = vols.filter(v => v.depart === parseInt(req.params.dep) && v.arrivee === parseInt(req.params.arr))
-    vols.forEach(d => {
-        if (d.depart === parseInt(req.params.dep) && d.arrivee !== parseInt(req.params.arr)) {
-            vols.forEach(a => {
-                if(a.arrivee === parseInt(req.params.arr) && a.depart === d.arrivee) {
-                    results.push([d, a])
-                }
-            })
-        }
-    })
-    res.status(200).json(results)
+    const dep = parseInt(req.params.dep)
+    const arr = parseInt(req.params.arr)
+
+    if (dep === undefined || arr === undefined) {
+        res.status(403).send("Invalid Aeroports Names")
+        return
+    }
+    
+    const ctl = new VolController()
+    const result = ctl.getIdDepArr(dep, arr)
+    if (!result) {
+        res.status(500).send("Internal Error")
+        return
+    }
+
+    res.status(200).json(result)
 })
 
 VolRoute.get('/name/:dep/:arr', (req,res) => {
-    var results = vols.filter(v => aeroports[v.depart].name === req.params.dep && aeroports[v.arrivee].name === req.params.arr)
-    vols.forEach(d => {
-        if (aeroports[d.depart].name === req.params.dep && aeroports[d.arrivee].name !== req.params.arr) {
-            vols.forEach(a => {
-                if(aeroports[a.arrivee].name === req.params.arr && a.depart === d.arrivee) {
-                    results.push([d, a])
-                }
-            })
-        }
-    })
-    res.status(200).json(results)
+    const dep = req.params.dep
+    const arr = req.params.arr
+
+    if (!dep || !arr) {
+        res.status(403).send("Invalid Aeroports Names")
+        return
+    }
+    
+    const ctl = new VolController()
+    const result = ctl.getNameDepArr(dep, arr)
+    if (!result) {
+        res.status(500).send("Internal Error")
+        return
+    }
+
+    res.status(200).json(result)
 })
 
 export {VolRoute}

@@ -48,8 +48,10 @@ UserRoute.post('/add', (req, res) =>
     }
 
     const ctl = new UserController()
-    ctl.addUser(new User(pseudo, email, password))
-    res.status(200)
+    const user = new User(pseudo, email, password)
+    ctl.addUser(user)
+
+    res.status(200).json(ctl.getAll())
 })
 
 export {UserRoute}

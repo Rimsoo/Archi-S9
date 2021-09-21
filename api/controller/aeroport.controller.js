@@ -2,7 +2,7 @@ import { Aeroport } from "../model/aeroport.js"
 
 export class AeroportController
 {
-	aeroports = [
+	static aeroports = [
 		new Aeroport("CDG", "Paris"),
 		new Aeroport("JFK", "New York"),
 		new Aeroport("DTW", "Detroit")
@@ -10,16 +10,16 @@ export class AeroportController
 
 	getAll()
 	{
-		return this.aeroports
+		return AeroportController.aeroports
 	}
 
 	getById(id)
 	{
-		return this.aeroports[id]
+		return AeroportController.aeroports[id]
 	}
 
 	getByName(name)
 	{
-		return this.aeroports.find(a => a.name === name)
+		return AeroportController.aeroports.find(a => a.name === name)
 	}
 }
