@@ -32,6 +32,7 @@ export class ReservationController
 
 	addReservation(reservation)
 	{
-		ReservationController.push(reservation)
+		ReservationController.reservation.push(reservation)
+		
 	}
 }
