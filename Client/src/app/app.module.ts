@@ -16,6 +16,7 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatStepperModule} from '@angular/material/stepper';
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -26,6 +27,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     ReservationsComponent,
   ],
   imports: [
+
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

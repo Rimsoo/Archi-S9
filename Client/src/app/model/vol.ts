@@ -1,9 +1,9 @@
-export class Vol {
+export interface Vol {
   id : number;
   depart : Depart;
   arrivee : Arrivee;
   prix: number;
-  place: number;
+  place: number
 
 }
 

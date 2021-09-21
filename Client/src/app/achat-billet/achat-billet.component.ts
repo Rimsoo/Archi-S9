@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {VolsService} from "../services/vols.service";
+import {first} from "rxjs/operators";
 
 interface Airport {
   value: string;
@@ -41,10 +43,19 @@ export class AchatBilletComponent implements OnInit {
     {value: 'Senior', viewValue: 'Senior(65 ans et plus)'},
   ];
 
-  constructor() { }
+  constructor(private volService: VolsService) { }
 
 
   ngOnInit(): void {
+    this.getVols();
+  }
+
+  getVols(): void {
+    this.volService.getAgence().pipe(first()).subscribe((res) =>{
+      console.log("Api-rest:-- "+res);
+    }, error => {
+      console.log("err---"+error);
+    })
   }
 
 }
