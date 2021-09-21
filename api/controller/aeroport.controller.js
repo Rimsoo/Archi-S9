@@ -12,12 +12,7 @@ export class AeroportController
 	{
 		return AeroportController.aeroports
 	}
-
-	getById(id)
-	{
-		return AeroportController.aeroports[id]
-	}
-
+	
 	getByName(name)
 	{
 		return AeroportController.aeroports.find(a => a.name === name)

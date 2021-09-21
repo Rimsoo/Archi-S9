@@ -12,7 +12,7 @@ AeroportRoute.get('/getAll', (req,res) => {
 	res.status(200).json(result)
 })
 
-AeroportRoute.get('/get/name/:name', (req,res) => {
+AeroportRoute.get('/get/:name', (req,res) => {
     const name = req.params.name
     if (!name) {
         res.status(403).send("Invalid Name")
@@ -21,23 +21,6 @@ AeroportRoute.get('/get/name/:name', (req,res) => {
 
     const ctl = new AeroportController()
     const ae = ctl.getByName(name)
-    if (!ae) {
-        res.status(404).send("Aeroport Not Found")
-        return
-    }
-
-    res.status(200).json(ae)
-})
-
-AeroportRoute.get('/get/id/:id', (req,res) => {
-    const id = parseInt(req.params.id)
-    if (id === undefined) {
-        res.status(403).send("Invalid Id")
-        return
-    }
-
-    const ctl = new AeroportController()
-    const ae = ctl.getById(id)
     if (!ae) {
         res.status(404).send("Aeroport Not Found")
         return

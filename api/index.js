@@ -16,6 +16,6 @@ app.use(cors(options))
 
 buildRoute(app)
 
-app.listen(3001, () => {
+app.listen(3000, () => {
 	console.log("Serveur à l'écoute 3000")
 })
