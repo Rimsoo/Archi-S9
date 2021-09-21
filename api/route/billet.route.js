@@ -31,10 +31,10 @@ BilletRoute.get('/get/reservation/:reservation_id', (req,res) => {
 })
 
 BilletRoute.post('/add', (req, res) => {
-	const id_vol = req.body.id_vol
+	const id_vol = parseInt(req.body.id_vol)
     const date = req.body.date
     const classe = req.body.classe
-	const id_reservation = req.body.id_reservation
+	const id_reservation = parseInt(req.body.id_reservation)
 	
     if (id_vol === undefined || !date || !classe || id_reservation === undefined) {
         res.status(403).send("Invalid Billet Informations")
