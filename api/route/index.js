@@ -7,10 +7,10 @@ import {VolRoute} from "./vol.route.js"
 
 export function buildRoute(app)
 {
-	app.use(AeroportRoute)
-	app.use(BilletRoute)
-	app.use(PassagerRoute)
-	app.use(ReservationRoute)
-	app.use(UserRoute)
-	app.use(VolRoute)
+	app.use('/aeroports', AeroportRoute)
+	app.use('/billets', BilletRoute)
+	app.use('/passagers', PassagerRoute)
+	app.use('/reservations', ReservationRoute)
+	app.use('/users', UserRoute)
+	app.use('/vols', VolRoute)
 }

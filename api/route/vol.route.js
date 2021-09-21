@@ -1,11 +1,11 @@
 import  express  from 'express'
 const VolRoute = express()
 
-VolRoute.get('/vols', (req,res) => {
+VolRoute.get('/getall', (req,res) => {
     res.status(200).json(vols)
 })
 
-VolRoute.get('/vols/id/:dep/:arr', (req,res) => {
+VolRoute.get('/id/:dep/:arr', (req,res) => {
     var results = vols.filter(v => v.depart === parseInt(req.params.dep) && v.arrivee === parseInt(req.params.arr))
     vols.forEach(d => {
         if (d.depart === parseInt(req.params.dep) && d.arrivee !== parseInt(req.params.arr)) {
@@ -19,7 +19,7 @@ VolRoute.get('/vols/id/:dep/:arr', (req,res) => {
     res.status(200).json(results)
 })
 
-VolRoute.get('/vols/name/:dep/:arr', (req,res) => {
+VolRoute.get('/name/:dep/:arr', (req,res) => {
     var results = vols.filter(v => aeroports[v.depart].name === req.params.dep && aeroports[v.arrivee].name === req.params.arr)
     vols.forEach(d => {
         if (aeroports[d.depart].name === req.params.dep && aeroports[d.arrivee].name !== req.params.arr) {
