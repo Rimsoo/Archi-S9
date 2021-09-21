@@ -4,10 +4,10 @@ import { BilletController } from './billet.controller.js';
 export class ReservationController 
 {
 	static reservation = [
-		new Reservation(0, 0),
-		new Reservation(1, 0),
-		new Reservation(2, 0),
-		new Reservation(3, 1),
+		new Reservation(0, 0, 1000),
+		new Reservation(1, 0, 700),
+		new Reservation(2, 0, 700),
+		new Reservation(3, 1, 300),
 	]
 
 	getAll()

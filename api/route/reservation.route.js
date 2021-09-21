@@ -49,16 +49,17 @@ ReservationRoute.get('/user/:id/', (req, res) =>
 })
 
 ReservationRoute.post('/add', (req, res) => {
-    const id_passager = req.body.id_passager
-    const id_utilisateur = req.body.id_utilisateur
+    const id_passager = parseInt(req.body.id_passager)
+    const id_utilisateur = parseInt(req.body.id_utilisateur)
+    const payed_price = parseIn(req.body.payed_price)
 	
-    if (id_utilisateur === undefined || id_passager === undefined) {
+    if (id_utilisateur === undefined || id_passager === undefined || !payed_price) {
         res.status(403).send("Invalid Reservation Informations")
         return
     }
 
     const ctl = new ReservationController()
-    const reservation = new Reservation(id_passager, id_utilisateur)
+    const reservation = new Reservation(id_passager, id_utilisateur, payed_price)
     ctl.addReservation(reservation)
 
     res.status(200).json(ctl.getAll())
