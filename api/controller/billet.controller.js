@@ -18,14 +18,14 @@ export class BilletController
 		return BilletController.billets
 	}
 	
-	getBillet(id)
+	getBillet(code)
 	{
-		return BilletController.billets.find(e => e.id === id)
+		return BilletController.billets.find(e => e.code === code)
 	}
 
 	addBillet(billet)
 	{
-        billet.id = BilletController.billets.length
+        billet.code = BilletController.billets.length
 		BilletController.billets.push(billet)
 	}
 }

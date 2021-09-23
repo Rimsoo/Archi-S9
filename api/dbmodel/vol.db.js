@@ -1,17 +1,17 @@
 export class Vol 
 {
-	id
-	depart
-	arrivee
-	prix
+	code
+	departure
+	arrival
+	base_price
 	place
 
-	constructor( depart, arrivee, prix, place, id = undefined)
+	constructor( departure, arrival, base_price, place, code = undefined)
 	{
-		this.id = id
-		this.depart = depart
-		this.arrivee = arrivee
-		this.prix = prix
+		this.code = code
+		this.departure = departure
+		this.arrival = arrival
+		this.base_price = base_price
 		this.place = place
 	}
 }

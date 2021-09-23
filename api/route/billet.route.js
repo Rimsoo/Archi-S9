@@ -14,15 +14,15 @@ BilletRoute.get(['/getall', '/'], (req,res) => {
 	res.status(200).json(result)
 })
 
-BilletRoute.get('/get/:id', (req,res) => {
-	const id = parseInt(req.params.id)
-	if (id === undefined) {
+BilletRoute.get('/get/:code', (req,res) => {
+	const code = parseInt(req.params.code)
+	if (code === undefined) {
 		res.status(403).send("Undefined Reservation Id")
 		return
 	}
 
 	const ctl = new BilletController()
-	const result = ctl.getBillet(id)
+	const result = ctl.getBillet(code)
     if (!result) {
 		res.status(500).send("Internal Error")
         return
@@ -31,7 +31,7 @@ BilletRoute.get('/get/:id', (req,res) => {
 })
 
 BilletRoute.post('/add', (req, res) => {
-	const vol = req.body.id_vol
+	const vol = req.body.code_vol
     const date = req.body.date
     const classe = req.body.classe
 	const reservation = req.body.reservation
@@ -53,7 +53,7 @@ BilletRoute.post('/addall', (req, res) => {
     const ctl = new BilletController()
 	
 	billets.forEach(b => {
-		const vol = req.body.id_vol
+		const vol = req.body.code_vol
 		const date = req.body.date
 		const classe = req.body.classe
 		const reservation = req.body.reservation

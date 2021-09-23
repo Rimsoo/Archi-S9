@@ -14,15 +14,15 @@ ReservationRoute.get(['/getall', '/'], (req,res) => {
 	res.status(200).json(result)
 })
 
-ReservationRoute.get('/get/:id', (req,res) => {
-    const id = parseInt(req.params.id)
-    if (id === undefined) {
+ReservationRoute.get('/get/:code', (req,res) => {
+    const code = parseInt(req.params.code)
+    if (code === undefined) {
         res.status(403).send("Invalid Id")
         return
     }
 
     const ctl = new ReservationController()
-    const result = ctl.getReservation(id)
+    const result = ctl.getReservation(code)
     if (!result) {
         res.status(404).send("Reservation Not Found")
         return

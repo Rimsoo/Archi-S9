@@ -1,14 +1,15 @@
 import {Vol} from '../model/vol.js'
 import { AeroportController } from '../controller/aeroport.controller.js'
+import { PlaneController } from './plane.controller.js'
 export class VolController
 {
 	static vols = [
-		new Vol("JFK", "CDG", "1000", "1000", 0),
-		new Vol("CDG", "DTW", "700", "700", 1),
-		new Vol("DTW", "JFK", "300", "300", 2),
-		new Vol("CDG", "JFK", "1000", "1000", 3),
-		new Vol("DTW", "CDG", "700", "700", 4),
-		new Vol("JFK", "DTW", "300", "300", 5),
+		new Vol("JFK", "CDG", "1000", PlaneController.planes[0], 0),
+		new Vol("CDG", "DTW", "700", PlaneController.planes[1], 1),
+		new Vol("DTW", "JFK", "300", PlaneController.planes[2], 2),
+		new Vol("CDG", "JFK", "1000", PlaneController.planes[0], 3),
+		new Vol("DTW", "CDG", "700", PlaneController.planes[1], 4),
+		new Vol("JFK", "DTW", "300", PlaneController.planes[2], 5),
 	]
 
 	getAll()
@@ -16,9 +17,9 @@ export class VolController
 		return VolController.vols
 	}
 
-	getVol(id)
+	getVol(code)
 	{
-		return VolController.vols.find(e => e.id === id)
+		return VolController.vols.find(e => e.code === code)
 	}
 
 	getDepArr(dep, arr)
@@ -27,12 +28,12 @@ export class VolController
 		const aeCtl = new AeroportController()
 		var results = []
 		results.push([VolController.vols.find(v => 
-			v.depart === dep && v.arrivee === arr)])
+			v.departure === dep && v.arrival === arr)])
 		
 		VolController.vols.forEach(d => {
-			if (d.depart === dep && d.arrivee !== arr) {
+			if (d.departure === dep && d.arrival !== arr) {
 				VolController.vols.forEach(a => {
-					if(a.arrivee === arr && a.depart === d.arrivee) {
+					if(a.arrival === arr && a.departure === d.arrival) {
 						results.push([d, a])
 					}
 				})

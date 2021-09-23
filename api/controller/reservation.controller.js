@@ -18,9 +18,9 @@ export class ReservationController
 		return ReservationController.reservations;
 	}
 
-	getReservation(id)
+	getReservation(code)
 	{
-		return ReservationController.reservations.find(e => e.id === id)
+		return ReservationController.reservations.find(e => e.code === code)
 	}
 
 	getUserReservation(user_name)
@@ -32,7 +32,7 @@ export class ReservationController
 	addReservation(reservation)
 	{
 		const ctl = new BilletController()
-        reservation.id = ReservationController.reservations.length
+        reservation.code = ReservationController.reservations.length
 		reservation.billets.forEach(r => {
 			ctl.addBillet(r)
 		}); 

@@ -1,17 +1,17 @@
 export class Billet 
 {
-	id
-	id_vol
+	code
+	code_vol
 	date
 	classe
-	id_reservation
+	code_reservation
 
-	constructor( id_vol, date, classe, id_reservation, id = undefined)
+	constructor( code_vol, date, classe, code_reservation, code = undefined)
 	{
-		this.id = id
-		this.id_vol = id_vol
+		this.code = code
+		this.code_vol = code_vol
 		this.date = date
 		this.classe = classe
-		this.id_reservation = id_reservation
+		this.code_reservation = code_reservation
 	}
 }
