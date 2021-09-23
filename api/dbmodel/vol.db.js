@@ -4,14 +4,14 @@ export class Vol
 	departure
 	arrival
 	base_price
-	plane
+	place
 
-	constructor( departure, arrival, base_price, plane, code = undefined)
+	constructor( departure, arrival, base_price, place, code = undefined)
 	{
 		this.code = code
 		this.departure = departure
 		this.arrival = arrival
 		this.base_price = base_price
-		this.plane = plane
+		this.place = place
 	}
 }

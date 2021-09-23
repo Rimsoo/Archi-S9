@@ -4,7 +4,7 @@ import { Passager } from '../model/passager.js'
 
 const PassagerRoute = express()
 
-PassagerRoute.get('/getall', (req, res) =>
+PassagerRoute.get(['/getall', '/'], (req, res) =>
 {
     const ctl = new PassagerController()
 	const result = ctl.getAll()

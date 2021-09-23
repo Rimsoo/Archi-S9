@@ -4,7 +4,7 @@ import { Billet } from '../model/billet.js'
 
 const BilletRoute = express()
 
-BilletRoute.get('/getall', (req,res) => {
+BilletRoute.get(['/getall', '/'], (req,res) => {
 	const ctl = new BilletController()
 	const result = ctl.getAll()
     if (!result) {
@@ -14,15 +14,15 @@ BilletRoute.get('/getall', (req,res) => {
 	res.status(200).json(result)
 })
 
-BilletRoute.get('/get/reservation/:reservation_id', (req,res) => {
-	const id_reservation = req.params.reservation_id
-	if (id_reservation === undefined) {
+BilletRoute.get('/get/:code', (req,res) => {
+	const code = parseInt(req.params.code)
+	if (code === undefined) {
 		res.status(403).send("Undefined Reservation Id")
 		return
 	}
 
 	const ctl = new BilletController()
-	const result = ctl.getBilletForReservation(id_reservation)
+	const result = ctl.getBillet(code)
     if (!result) {
 		res.status(500).send("Internal Error")
         return
@@ -31,18 +31,18 @@ BilletRoute.get('/get/reservation/:reservation_id', (req,res) => {
 })
 
 BilletRoute.post('/add', (req, res) => {
-	const id_vol = parseInt(req.body.id_vol)
+	const vol = req.body.code_vol
     const date = req.body.date
     const classe = req.body.classe
-	const id_reservation = parseInt(req.body.id_reservation)
+	const reservation = req.body.reservation
 	
-    if (id_vol === undefined || !date || !classe || id_reservation === undefined) {
+    if (!vol || !date || !classe || !reservation) {
         res.status(403).send("Invalid Billet Informations")
         return
     }
 
     const ctl = new BilletController()
-    const billet = new Billet(id_vol, date, classe, id_reservation)
+    const billet = new Billet(vol, date, classe, reservation)
     ctl.addBillet(billet)
 
     res.status(200).json(ctl.getAll())
@@ -53,17 +53,18 @@ BilletRoute.post('/addall', (req, res) => {
     const ctl = new BilletController()
 	
 	billets.forEach(b => {
-		const id_vol = b.id_vol
-		const date = b.date
-		const classe = b.classe
-		const id_reservation = b.id_reservation
+		const vol = req.body.code_vol
+		const date = req.body.date
+		const classe = req.body.classe
+		const reservation = req.body.reservation
 		
-		if (id_vol === undefined || !date || !classe || id_reservation === undefined) {
-			res.status(403).send("Invalid Billets Informations")
+		if (!vol || !date || !classe || !reservation) {
+			res.status(403).send("Invalid Billet Informations")
 			return
 		}
-	
-		const billet = new Billet(id_vol, date, classe, id_reservation)
+
+		const ctl = new BilletController()
+		const billet = new Billet(vol, date, classe, reservation)
 		ctl.addBillet(billet)
 	});
 

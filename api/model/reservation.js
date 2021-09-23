@@ -1,15 +1,17 @@
 export class Reservation 
 {
-	id
-	id_passager
-	id_utilisateur
+	code
+	passager
+	utilisateur
 	payed_price
+	billets
 
-	constructor( id_passager, id_utilisateur, payed_price, id = undefined) 
+	constructor( passager, utilisateur, payed_price, billets, code = undefined) 
 	{
-		this.id = id
-		this.id_passager = id_passager
-		this.id_utilisateur = id_utilisateur
+		this.code = code
+		this.passager = passager
+		this.utilisateur = utilisateur
 		this.payed_price = payed_price
+		this.billets = billets
 	}
 }

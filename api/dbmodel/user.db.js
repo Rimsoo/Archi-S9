@@ -1,14 +1,14 @@
 export class User 
 {
 	id
-	name
+	pseudo
 	email
 	password
 
-	constructor( name, email, password, id = undefined)
+	constructor( pseudo, email, password, id = undefined)
 	{
 		this.id = id
-		this.name = name
+		this.pseudo = pseudo
 		this.email = email
 		this.password = password
 	}
