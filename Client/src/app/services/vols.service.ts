@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {async, Observable} from "rxjs";
-import {Vol, Vols} from "../model/vol";
+import {Observable, asyncScheduler} from "rxjs";
+import {Vols} from "../model/vols";
 import {map} from "rxjs/operators";
 
 
@@ -10,20 +10,43 @@ import {map} from "rxjs/operators";
   providedIn: 'root'
 })
 export class VolsService {
-  apiUrl = environment.backend_base +'/vols/CDG/JFK';
+  apiUrl = environment.backend_base +'/vols';
 
   headers= new HttpHeaders().set('content-type', 'application/json');
 
   constructor(private http: HttpClient) { }
 
-
-  getAgence(): Observable<Vol> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    return this.http.get<Vol>(`${this.apiUrl}`, httpOptions ).pipe(map(vol => vol));
+  /**
+   * Search Flight
+   * @param depart
+   * @param arrivee
+   */
+  async searchFlight(depart: string, arrivee : string): Promise<Vols> {
+    return new Promise<Vols>(((resolve, reject) => {
+      this.http.get(`${this.apiUrl}/${depart}/${arrivee}`, {responseType: 'text'}).toPromise().then(
+        res => {
+          resolve(JSON.parse(res));
+        }, rej => {
+          reject(rej);
+        }
+      );
+    }));
   }
+
+  async getAllFlight(): Promise<Vols> {
+    return new Promise<Vols>(((resolve, reject) => {
+      this.http.get(`${this.apiUrl}`, {responseType: 'text'}).toPromise().then(
+        res => {
+          resolve(JSON.parse(res));
+        }, rej => {
+          reject(rej);
+        }
+      );
+    }));
+  }
+
+
+
 }
+
 

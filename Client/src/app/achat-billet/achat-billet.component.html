@@ -1,5 +1,6 @@
 <div id="billet">
-  <div class="bloc">
+  <form>
+  <div  class="bloc">
     <mat-form-field appearance="fill">
       <mat-label>Départ de</mat-label>
       <mat-select name="food">
@@ -34,18 +35,19 @@
     <mat-form-field appearance="fill">
       <mat-label>Cabine</mat-label>
       <mat-select name="food">
-        <mat-option *ngFor="let cabine of Cabine" [value]="cabine.value">
+        <mat-option *ngFor="let cabine of Cabine"  [value]="cabine.value">
           {{cabine.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
+  </form>
   <div class="bloc-b">
     <button mat-stroked-button color="primary">Rechercher</button>
   </div>
 
 
-  <div class="bloc-b" >
+  <div class="bloc-b" *ngFor="let t of vols">
     <mat-card class="example-card">
       <mat-card-header>
         <mat-card-title></mat-card-title>
@@ -53,13 +55,15 @@
       <mat-card-content>
         <mat-stepper orientation="vertical">
           <mat-step>
-            <ng-template matStepLabel>Départ</ng-template>
+            <ng-template matStepLabel>Départ: {{t.departure}}</ng-template>
             <ng-template matStepContent>
-              <p>Description du vol</p>
+              <p>Prix : {{t.base_price}}</p>
+              <p>Nom : {{t.plane.name}}</p>
+              <p>Sièges disponibles : {{t.plane.total_seats}}</p>
             </ng-template>
           </mat-step>
           <mat-step>
-            <ng-template matStepLabel>Arrivée</ng-template>
+            <ng-template matStepLabel>Arrivée : {{t.arrival}}</ng-template>
           </mat-step>
         </mat-stepper>
 

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {VolsService} from "../services/vols.service";
-import {first} from "rxjs/operators";
-import {Vol, Vols} from "../model/vol";
+import {Vols} from "../model/vols";
 
 interface Airport {
   value: string;
@@ -37,27 +36,40 @@ export class AchatBilletComponent implements OnInit {
     {value: 'Business', viewValue: 'Business'}
   ];
 
-  vol;
+  vols = <any>[];
+  fVols
 
   constructor(private volService: VolsService) {
   }
 
 
   ngOnInit(): void {
-    this.getVols();
+    //this.init();
+    this.getAllFlight();
   }
 
-  getVols(): void {
-    this.volService.getAgence().pipe(first()).subscribe((res) =>{
-      //console.log("Api-rest:-- "+JSON.stringify(res));
-        this.vol = JSON.stringify(res);
-      console.log("Api-rest:-- "+this.vol);
-      //return JSON.stringify(res);
-      //this.vol = res.result
+  async init() {
+    this.fVols = [];
+    await this.volService.searchFlight(this.vols.depart, this.vols.arrivee ).then(res => {
+        this.vols = res;
+        console.log(res);
+        this.fVols = res
+      this.fVols.forEach(element => console.log(element))
+      }, r => {
+        console.log('errr' + r);
+      });
 
-    }, error => {
-      console.log("err---"+error);
-    })
   }
+
+  async getAllFlight() {
+    await this.volService.getAllFlight().then(res => {
+      this.vols = res;
+    }, r => {
+      console.log('errr' + r);
+    });
+
+  }
+
+
 
 }
