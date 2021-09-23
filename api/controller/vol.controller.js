@@ -29,10 +29,11 @@ export class VolController
 		return VolController.vols.find(e => e.code === code)
 	}
 
-	getDepArr(dep, arr)
+	async getDepArr(dep, arr)
 	{
 		var vols = VolController.vols
-		vols.concat(getAllExt())
+		const ext = await this.getAllExt()
+		ext.forEach(r => vols.push(r))
 		
 		var results = []
 		results.push([vols.find(v => 

@@ -18,7 +18,7 @@ VolRoute.get(['/getall', '/'], async (req,res) => {
 	res.send(result)
 })
 
-VolRoute.get('/:dep/:arr', (req,res) => {
+VolRoute.get('/:dep/:arr', async (req,res) => {
     const dep = req.params.dep
     const arr = req.params.arr
 
@@ -28,7 +28,7 @@ VolRoute.get('/:dep/:arr', (req,res) => {
     }
     
     const ctl = new VolController()
-    const result = ctl.getDepArr(dep, arr)
+    const result = await ctl.getDepArr(dep, arr)
     if (!result) {
         res.status(500).send("Internal Error")
         return
