@@ -25,11 +25,7 @@ interface Passagers {
 export class AchatBilletComponent implements OnInit {
 
 
-  Airport: Airport[] = [
-    {value: 'steak-0', viewValue: 'DTW'},
-    {value: 'pizza-1', viewValue: 'JFK'},
-    {value: 'tacos-2', viewValue: 'CDG'}
-  ];
+  Airport = <any>[];
 
   Cabine: Cabine[] = [
     {value: 'Economy', viewValue: 'Economy'},
@@ -37,7 +33,9 @@ export class AchatBilletComponent implements OnInit {
   ];
 
   vols = <any>[];
-  fVols
+  fVols;
+  private depart: any;
+  private arrivee: any;
 
   constructor(private volService: VolsService) {
   }
@@ -46,11 +44,12 @@ export class AchatBilletComponent implements OnInit {
   ngOnInit(): void {
     //this.init();
     this.getAllFlight();
+    this.getAirports();
   }
 
-  async init() {
+  async search() {
     this.fVols = [];
-    await this.volService.searchFlight(this.vols.depart, this.vols.arrivee ).then(res => {
+    await this.volService.searchFlight(this.depart, this.arrivee ).then(res => {
         this.vols = res;
         console.log(res);
         this.fVols = res
@@ -70,6 +69,19 @@ export class AchatBilletComponent implements OnInit {
 
   }
 
+  async getAirports() {
+    await this.volService.getAirports().then(res => {
+      this.Airport = res;
+    }, r => {
+      console.log('errr' + r);
+    });
+  }
 
+  updateDeparture(depart) {
+    this.depart = depart;
+  }
 
+  updateArrival(arrivee) {
+    this.arrivee = arrivee;
+  }
 }

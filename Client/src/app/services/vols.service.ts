@@ -45,6 +45,18 @@ export class VolsService {
     }));
   }
 
+  async getAirports(): Promise<Vols> {
+    return new Promise<Vols>(((resolve, reject) => {
+      this.http.get(`${environment.backend_base +'/aeroports'}`, {responseType: 'text'}).toPromise().then(
+        res => {
+          resolve(JSON.parse(res));
+        }, rej => {
+          reject(rej);
+        }
+      );
+    }));
+  }
+
 
 
 }

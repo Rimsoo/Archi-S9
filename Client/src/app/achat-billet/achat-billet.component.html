@@ -3,9 +3,9 @@
   <div  class="bloc">
     <mat-form-field appearance="fill">
       <mat-label>Départ de</mat-label>
-      <mat-select name="food">
-        <mat-option *ngFor="let vols of Airport" [value]="vols.value">
-          {{vols.viewValue}}
+      <mat-select name="departure" (change)="updateDeparture($event.value)" >
+        <mat-option *ngFor="let vols of Airport" [value]="vols.name">
+          {{vols.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -13,9 +13,9 @@
   <div class="bloc">
     <mat-form-field appearance="fill">
       <mat-label>Arrivée à</mat-label>
-      <mat-select name="food">
-        <mat-option *ngFor="let vols of Airport" [value]="vols.value">
-          {{vols.viewValue}}
+      <mat-select name="arrival" (change)="updateArrival($event.value)">
+        <mat-option *ngFor="let vols of Airport" [value]="vols.name">
+          {{vols.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -34,7 +34,7 @@
   <div class="bloc">
     <mat-form-field appearance="fill">
       <mat-label>Cabine</mat-label>
-      <mat-select name="food">
+      <mat-select name="arrival">
         <mat-option *ngFor="let cabine of Cabine"  [value]="cabine.value">
           {{cabine.viewValue}}
         </mat-option>
@@ -43,7 +43,7 @@
   </div>
   </form>
   <div class="bloc-b">
-    <button mat-stroked-button color="primary">Rechercher</button>
+    <button mat-stroked-button color="primary" (click)="search()">Rechercher</button>
   </div>
 
 
