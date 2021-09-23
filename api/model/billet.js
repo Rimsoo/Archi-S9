@@ -1,14 +1,14 @@
 export class Billet 
 {
 	id
-	id_vol
+	vol
 	date
 	classe
 
-	constructor( id_vol, date, classe, id = undefined)
+	constructor( vol, date, classe, id = undefined)
 	{
 		this.id = id
-		this.id_vol = id_vol
+		this.vol = vol
 		this.date = date
 		this.classe = classe
 	}
