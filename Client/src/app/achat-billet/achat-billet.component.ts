@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {VolsService} from "../services/vols.service";
 import {first} from "rxjs/operators";
+import {Vol, Vols} from "../model/vol";
 
 interface Airport {
   value: string;
@@ -36,14 +37,10 @@ export class AchatBilletComponent implements OnInit {
     {value: 'Business', viewValue: 'Business'}
   ];
 
-  Passagers: Passagers[] = [
-    {value: 'Jeune', viewValue: 'Jeune(18-24 ans)'},
-    {value: 'Etudiant', viewValue: 'Etudiant(18-29 ans)'},
-    {value: 'Adulte', viewValue: 'Adulte'},
-    {value: 'Senior', viewValue: 'Senior(65 ans et plus)'},
-  ];
+  vol;
 
-  constructor(private volService: VolsService) { }
+  constructor(private volService: VolsService) {
+  }
 
 
   ngOnInit(): void {
@@ -52,7 +49,12 @@ export class AchatBilletComponent implements OnInit {
 
   getVols(): void {
     this.volService.getAgence().pipe(first()).subscribe((res) =>{
-      console.log("Api-rest:-- "+res);
+      //console.log("Api-rest:-- "+JSON.stringify(res));
+        this.vol = JSON.stringify(res);
+      console.log("Api-rest:-- "+this.vol);
+      //return JSON.stringify(res);
+      //this.vol = res.result
+
     }, error => {
       console.log("err---"+error);
     })
