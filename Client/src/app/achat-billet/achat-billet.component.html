@@ -3,7 +3,7 @@
   <div  class="bloc">
     <mat-form-field appearance="fill">
       <mat-label>Départ de</mat-label>
-      <mat-select name="departure" (change)="updateDeparture($event.value)" >
+      <mat-select name="departure" [(ngModel)]="departure" >
         <mat-option *ngFor="let vols of Airport" [value]="vols.name">
           {{vols.name}}
         </mat-option>
@@ -13,7 +13,7 @@
   <div class="bloc">
     <mat-form-field appearance="fill">
       <mat-label>Arrivée à</mat-label>
-      <mat-select name="arrival" (change)="updateArrival($event.value)">
+      <mat-select name="arrival" [(ngModel)]="arrival" >
         <mat-option *ngFor="let vols of Airport" [value]="vols.name">
           {{vols.name}}
         </mat-option>

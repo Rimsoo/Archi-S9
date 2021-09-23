@@ -31,11 +31,9 @@ export class AchatBilletComponent implements OnInit {
     {value: 'Economy', viewValue: 'Economy'},
     {value: 'Business', viewValue: 'Business'}
   ];
-
+  departure: string
+  arrival: string
   vols = <any>[];
-  fVols;
-  private depart: any;
-  private arrivee: any;
 
   constructor(private volService: VolsService) {
   }
@@ -48,12 +46,10 @@ export class AchatBilletComponent implements OnInit {
   }
 
   async search() {
-    this.fVols = [];
-    await this.volService.searchFlight(this.depart, this.arrivee ).then(res => {
+  
+    await this.volService.searchFlight(this.departure, this.arrival ).then(res => {
         this.vols = res;
         console.log(res);
-        this.fVols = res
-      this.fVols.forEach(element => console.log(element))
       }, r => {
         console.log('errr' + r);
       });
@@ -77,11 +73,14 @@ export class AchatBilletComponent implements OnInit {
     });
   }
 
-  updateDeparture(depart) {
-    this.depart = depart;
-  }
+  // updateDeparture(event : Event) {
+  //   console.log(event.target);
+  //   console.log("poueeeet");
+    
+  //   this.depart = event;
+  // }
 
-  updateArrival(arrivee) {
-    this.arrivee = arrivee;
-  }
+  // updateArrival(arrivee: any) {
+  //   this.arrivee = arrivee;
+  // }
 }

@@ -17,6 +17,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatStepperModule} from '@angular/material/stepper';
 import {HttpClientModule} from "@angular/common/http";
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import {HttpClientModule} from "@angular/common/http";
     ReservationsComponent,
   ],
   imports: [
-
+    FormsModule,
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
