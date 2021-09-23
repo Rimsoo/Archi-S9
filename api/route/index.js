@@ -4,6 +4,7 @@ import {PassagerRoute} from "./passager.route.js"
 import {ReservationRoute} from "./reservation.route.js"
 import {UserRoute} from "./user.route.js"
 import {VolRoute} from "./vol.route.js"
+import {PlaneRoute} from "./plane.route.js"
 
 export function buildRoute(app)
 {
@@ -13,4 +14,5 @@ export function buildRoute(app)
 	app.use('/reservations', ReservationRoute)
 	app.use('/users', UserRoute)
 	app.use('/vols', VolRoute)
+	app.use('/planes', PlaneRoute)
 }

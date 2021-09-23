@@ -4,7 +4,7 @@ import { Reservation } from '../model/reservation.js'
 
 const ReservationRoute = express()
 
-ReservationRoute.get('/getall', (req,res) => {
+ReservationRoute.get(['/getall', '/'], (req,res) => {
     const ctl = new ReservationController()
 	const result = ctl.getAll()
     if (!result) {
@@ -14,15 +14,15 @@ ReservationRoute.get('/getall', (req,res) => {
 	res.status(200).json(result)
 })
 
-ReservationRoute.get('/get/:id', (req,res) => {
-    const id = parseInt(req.params.id)
-    if (id === undefined) {
+ReservationRoute.get('/get/:code', (req,res) => {
+    const code = parseInt(req.params.code)
+    if (code === undefined) {
         res.status(403).send("Invalid Id")
         return
     }
 
     const ctl = new ReservationController()
-    const result = ctl.getReservation(id)
+    const result = ctl.getReservation(code)
     if (!result) {
         res.status(404).send("Reservation Not Found")
         return
@@ -31,16 +31,16 @@ ReservationRoute.get('/get/:id', (req,res) => {
     res.status(200).json(result)
 })
 
-ReservationRoute.get('/user/:id/', (req, res) =>
+ReservationRoute.get('/user/:name/', (req, res) =>
 {
-    const id_user = parseInt(req.params.id)
-    if (id_user === undefined) {
+    const user_name = req.params.name
+    if (!user_name) {
         res.status(403).send("Invalid User Id")
         return
     }
 
     const ctl = new ReservationController()
-    const results = ctl.getUserReservation(id_user)
+    const results = ctl.getUserReservation(user_name)
     if (!results) {
         res.status(404).send("No Reservation Found")
         return
@@ -49,17 +49,18 @@ ReservationRoute.get('/user/:id/', (req, res) =>
 })
 
 ReservationRoute.post('/add', (req, res) => {
-    const id_passager = parseInt(req.body.id_passager)
-    const id_utilisateur = parseInt(req.body.id_utilisateur)
-    const payed_price = parseIn(req.body.payed_price)
+    const passager = req.body.passager
+    const utilisateur = req.body.utilisateur
+    const payed_price = parseInt(req.body.payed_price)
+    const billets = req.body.billets
 	
-    if (id_utilisateur === undefined || id_passager === undefined || !payed_price) {
+    if (utilisateur === undefined || passager === undefined || !payed_price || !billets) {
         res.status(403).send("Invalid Reservation Informations")
         return
     }
 
     const ctl = new ReservationController()
-    const reservation = new Reservation(id_passager, id_utilisateur, payed_price)
+    const reservation = new Reservation(passager, utilisateur, payed_price, billets)
     ctl.addReservation(reservation)
 
     res.status(200).json(ctl.getAll())

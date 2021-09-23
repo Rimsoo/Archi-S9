@@ -1,9 +1,9 @@
 import  express  from 'express'
-import { AeroportController } from '../controller/aeroport.controller.js'
-const AeroportRoute = express()
+import { PlaneController } from '../controller/plane.controller.js'
+const PlaneRoute = express()
 
-AeroportRoute.get(['/getall', '/'], (req,res) => {
-	const ctl = new AeroportController()
+PlaneRoute.get(['/getall', '/'], (req,res) => {
+	const ctl = new PlaneController()
 	const result = ctl.getAll()
     if (!result) {
 		res.status(500).send("Internal Error")
@@ -12,21 +12,21 @@ AeroportRoute.get(['/getall', '/'], (req,res) => {
 	res.status(200).json(result)
 })
 
-AeroportRoute.get('/get/:name', (req,res) => {
+PlaneRoute.get('/get/:name', (req,res) => {
     const name = req.params.name
     if (!name) {
         res.status(403).send("Invalid Name")
         return
     }
 
-    const ctl = new AeroportController()
+    const ctl = new PlaneController()
     const ae = ctl.getByName(name)
     if (!ae) {
-        res.status(404).send("Aeroport Not Found")
+        res.status(404).send("Plane Not Found")
         return
     }
 
     res.status(200).json(ae)
 })
 
-export {AeroportRoute}
+export {PlaneRoute}

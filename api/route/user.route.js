@@ -4,7 +4,7 @@ import { User } from '../model/user.js'
 
 const UserRoute = express()
 
-UserRoute.get('/getall', (req, res) =>
+UserRoute.get(['/getall', '/'], (req, res) =>
 {
     const ctl = new UserController()
     const result = ctl.getAll()
@@ -38,17 +38,17 @@ UserRoute.get('/get/:id', (req, res) =>
 
 UserRoute.post('/add', (req, res) =>
 {
-    const pseudo = req.body.pseudo
+    const name = req.body.name
     const email = req.body.email
     const password = req.body.password
     
-    if (!pseudo || !email || !password) {
+    if (!name || !email || !password) {
         res.status(403).send("Invalid User Informations")
         return
     }
 
     const ctl = new UserController()
-    const user = new User(pseudo, email, password)
+    const user = new User(name, email, password)
     ctl.addUser(user)
 
     res.status(200).json(ctl.getAll())

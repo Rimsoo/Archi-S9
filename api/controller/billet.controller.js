@@ -1,15 +1,16 @@
 import { Billet } from "../model/billet.js";
+import { VolController } from "./vol.controller.js";
 
 export class BilletController 
 {
 	static billets = [
-		new Billet(0, "10-10-2019", 1, 0),
-		new Billet(1, "10-10-2019", 2, 0),
-		new Billet(0, "10-10-2019", 1, 1),
-		new Billet(1, "10-10-2019", 2, 1),
-		new Billet(0, "10-10-2019", 1, 2),
-		new Billet(1, "10-10-2019", 2, 2),
-		new Billet(3, "11-10-2019", 1, 3),
+		new Billet(VolController.vols[0], "10-10-2019", 1, 0),
+		new Billet(VolController.vols[1], "10-10-2019", 2, 1),
+		new Billet(VolController.vols[0], "10-10-2019", 1, 2),
+		new Billet(VolController.vols[1], "10-10-2019", 2, 3),
+		new Billet(VolController.vols[0], "10-10-2019", 1, 4),
+		new Billet(VolController.vols[1], "10-10-2019", 2, 5),
+		new Billet(VolController.vols[3], "11-10-2019", 1, 6),
 	]
 
 	getAll()
@@ -17,18 +18,14 @@ export class BilletController
 		return BilletController.billets
 	}
 	
-	getBillet(id)
+	getBillet(code)
 	{
-		return BilletController.billets[id]
-	}
-
-	getBilletForReservation(id_reservation)
-	{
-		return BilletController.billets.filter(b => b.id_reservation === id_reservation)
+		return BilletController.billets.find(e => e.code === code)
 	}
 
 	addBillet(billet)
 	{
+        billet.code = BilletController.billets.length
 		BilletController.billets.push(billet)
 	}
 }
