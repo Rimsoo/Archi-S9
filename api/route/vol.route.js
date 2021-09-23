@@ -3,7 +3,7 @@ import { VolController } from '../controller/vol.controller.js'
 
 const VolRoute = express()
 
-VolRoute.get('/getall', (req,res) => {
+VolRoute.get(['/getall', '/'], (req,res) => {
     const ctl = new VolController()
 	const result = ctl.getAll()
     if (!result) {

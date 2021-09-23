@@ -4,7 +4,7 @@ import { Billet } from '../model/billet.js'
 
 const BilletRoute = express()
 
-BilletRoute.get('/getall', (req,res) => {
+BilletRoute.get(['/getall', '/'], (req,res) => {
 	const ctl = new BilletController()
 	const result = ctl.getAll()
     if (!result) {
@@ -14,15 +14,15 @@ BilletRoute.get('/getall', (req,res) => {
 	res.status(200).json(result)
 })
 
-BilletRoute.get('/get/reservation/:reservation_id', (req,res) => {
-	const id_reservation = req.params.reservation_id
-	if (id_reservation === undefined) {
+BilletRoute.get('/get/:id', (req,res) => {
+	const id = parseInt(req.params.id)
+	if (id === undefined) {
 		res.status(403).send("Undefined Reservation Id")
 		return
 	}
 
 	const ctl = new BilletController()
-	const result = ctl.getBilletForReservation(id_reservation)
+	const result = ctl.getBillet(id)
     if (!result) {
 		res.status(500).send("Internal Error")
         return

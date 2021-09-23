@@ -2,7 +2,7 @@ import  express  from 'express'
 import { AeroportController } from '../controller/aeroport.controller.js'
 const AeroportRoute = express()
 
-AeroportRoute.get('/getAll', (req,res) => {
+AeroportRoute.get(['/getall', '/'], (req,res) => {
 	const ctl = new AeroportController()
 	const result = ctl.getAll()
     if (!result) {
