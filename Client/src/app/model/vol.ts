@@ -1,18 +1,21 @@
+export interface Vols {
+  result: Result[]
+
+}
+
+export interface Result {
+  id : number;
+  depart : number;
+  arrivee : number;
+  prix: number;
+  place: number;
+}
+
 export interface Vol {
   id : number;
-  depart : Depart;
-  arrivee : Arrivee;
+  depart : number;
+  arrivee : number;
   prix: number;
-  place: number
-
-}
-
-export interface Depart {
-  name: string;
-  ville: string;
-}
-
-export interface Arrivee {
-  name: string;
-  ville: string;
-}
+  place: number;
+  result: Result[]
+}[]
