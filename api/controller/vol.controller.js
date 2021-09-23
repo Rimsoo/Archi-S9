@@ -1,5 +1,6 @@
 import {Vol} from '../model/vol.js'
-import { AeroportController } from '../controller/aeroport.controller.js'
+import request from 'request'
+import axios from 'axios'
 import { PlaneController } from './plane.controller.js'
 export class VolController
 {
@@ -17,6 +18,12 @@ export class VolController
 		return VolController.vols
 	}
 
+	async getAllExt()
+	{
+		let result = await axios.get('https://api-6yfe7nq4sq-uc.a.run.app/flights')
+		return result.data
+	}
+
 	getVol(code)
 	{
 		return VolController.vols.find(e => e.code === code)
@@ -24,15 +31,16 @@ export class VolController
 
 	getDepArr(dep, arr)
 	{
-		const aeroports = AeroportController.aeroports
-		const aeCtl = new AeroportController()
+		var vols = VolController.vols
+		vols.concat(getAllExt())
+		
 		var results = []
-		results.push([VolController.vols.find(v => 
+		results.push([vols.find(v => 
 			v.departure === dep && v.arrival === arr)])
 		
-		VolController.vols.forEach(d => {
+		vols.forEach(d => {
 			if (d.departure === dep && d.arrival !== arr) {
-				VolController.vols.forEach(a => {
+				vols.forEach(a => {
 					if(a.arrival === arr && a.departure === d.arrival) {
 						results.push([d, a])
 					}

@@ -1,25 +1,21 @@
 import  express  from 'express'
-import request from 'request'
 import { VolController } from '../controller/vol.controller.js'
 
 const VolRoute = express()
 
-VolRoute.get(['/getall', '/'], (req,res) => {
+VolRoute.get(['/getall', '/'], async (req,res) => {
     const ctl = new VolController()
-	const result = ctl.getAll()
-
-    request('https://api-6yfe7nq4sq-uc.a.run.app/flights', { json: true }, (err, res, body) => {
-        if (err) { return console.log(err) }
-        res.body.forEach(f => {
-            result.push(f)
-        });
-    }); 
+	var result = ctl.getAll()
+    const ext = await ctl.getAllExt()
+    ext.forEach(r => {
+        result.push(r)
+    });
 
     if (!result) {
 		res.status(500).send("Internal Error")
         return
 	}
-	res.status(200).json(result)
+	res.send(result)
 })
 
 VolRoute.get('/:dep/:arr', (req,res) => {
