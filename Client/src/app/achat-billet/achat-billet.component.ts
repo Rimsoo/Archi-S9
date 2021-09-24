@@ -2,17 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {VolsService} from "../services/vols.service";
 import {Vols} from "../model/vols";
 
-interface Airport {
-  value: string;
-  viewValue: string;
-}
 
 interface Cabine {
-  value: string;
-  viewValue: string;
-}
-
-interface Passagers {
   value: string;
   viewValue: string;
 }
@@ -40,28 +31,16 @@ export class AchatBilletComponent implements OnInit {
 
 
   ngOnInit(): void {
-    //this.init();
-    this.getAllFlight();
     this.getAirports();
   }
 
   async search() {
-  
+
     await this.volService.searchFlight(this.departure, this.arrival ).then(res => {
         this.vols = res;
-        console.log(res);
       }, r => {
         console.log('errr' + r);
       });
-
-  }
-
-  async getAllFlight() {
-    await this.volService.getAllFlight().then(res => {
-      this.vols = res;
-    }, r => {
-      console.log('errr' + r);
-    });
 
   }
 
@@ -73,14 +52,5 @@ export class AchatBilletComponent implements OnInit {
     });
   }
 
-  // updateDeparture(event : Event) {
-  //   console.log(event.target);
-  //   console.log("poueeeet");
-    
-  //   this.depart = event;
-  // }
 
-  // updateArrival(arrivee: any) {
-  //   this.arrivee = arrivee;
-  // }
 }

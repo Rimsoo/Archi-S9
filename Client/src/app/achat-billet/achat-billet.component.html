@@ -55,15 +55,15 @@
       <mat-card-content>
         <mat-stepper orientation="vertical">
           <mat-step>
-            <ng-template matStepLabel>Départ: {{t.departure}}</ng-template>
+            <ng-template matStepLabel>Départ: {{t[0].departure }}</ng-template>
             <ng-template matStepContent>
-              <p>Prix : {{t.base_price}}</p>
-              <p>Nom : {{t.plane.name}}</p>
-              <p>Sièges disponibles : {{t.plane.total_seats}}</p>
+              <p>Prix : {{t[0].base_price }}</p>
+              <p>Nom : {{t[0].plane.name}}</p>
+              <p>Sièges disponibles : {{t[0].plane.total_seats}}</p>
             </ng-template>
           </mat-step>
           <mat-step>
-            <ng-template matStepLabel>Arrivée : {{t.arrival}}</ng-template>
+            <ng-template matStepLabel>Arrivée : {{t[0].arrival}}</ng-template>
           </mat-step>
         </mat-stepper>
 
