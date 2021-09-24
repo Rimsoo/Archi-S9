@@ -44,6 +44,7 @@ export class VolController
 				vols.forEach(a => {
 					if(a.arrival === arr && a.departure === d.arrival) {
 						results.push([d, a])
+						vols.pop(d)
 					}
 				})
 			}
