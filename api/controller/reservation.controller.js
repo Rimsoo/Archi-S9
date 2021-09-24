@@ -1,4 +1,4 @@
-import { Billet } from '../model/billet.js';
+import axios from 'axios'
 import {Reservation} from '../model/reservation.js'
 import { BilletController } from './billet.controller.js';
 import { UserController } from './user.controller.js';
@@ -21,6 +21,14 @@ export class ReservationController
 	getReservation(code)
 	{
 		return ReservationController.reservations.find(e => e.code === code)
+	}
+
+	async getAllExt()
+	{
+		let result = await axios.get('https://api-6yfe7nq4sq-uc.a.run.app/tickets')
+		let other = await axios.get('http://api.tcousin.com/api/v1/ticket/')
+
+		return result.data
 	}
 
 	getUserReservation(user_name)

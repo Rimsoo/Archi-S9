@@ -4,9 +4,11 @@ import { Reservation } from '../model/reservation.js'
 
 const ReservationRoute = express()
 
-ReservationRoute.get(['/getall', '/'], (req,res) => {
+ReservationRoute.get(['/getall', '/'], async (req,res) => {
     const ctl = new ReservationController()
 	const result = ctl.getAll()
+    const ext = await ctl.getAllExt()
+    ext.forEach(r => result.push(r));
     if (!result) {
 		res.status(500).send("Internal Error")
         return

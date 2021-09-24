@@ -1,5 +1,4 @@
 import {Vol} from '../model/vol.js'
-import request from 'request'
 import axios from 'axios'
 import { PlaneController } from './plane.controller.js'
 export class VolController
@@ -18,9 +17,29 @@ export class VolController
 		return VolController.vols
 	}
 
-	async getAllExt()
+	async getAllExt(date = undefined)
 	{
+		if(!date)
+		{
+			date = new Date()
+			const d = (date.getDate() < 10)?'0'+date.getDate():date.getDate()
+			const m = (date.getMonth() < 10)?'0'+date.getMonth():date.getMonth()
+			const y = (date.getFullYear() < 10)?'0'+date.getFullYear():date.getFullYear()
+			date = d+'-'+m+'-'+y
+		}	
+		
 		let result = await axios.get('https://api-6yfe7nq4sq-uc.a.run.app/flights')
+		let other = await axios.get('http://api.tcousin.com/api/v1/journey/'+date)
+
+		other.data.forEach(d => {
+			d.code = d.id
+			d.departure = d.flight.departure.tag
+			d.arrival = d.flight.arrival.tag
+			d.base_price = d.flight.price
+			d.plane = {name :'Cousin', total_seats: d.flight.seats}
+
+			result.data.push(d)
+		})
 		return result.data
 	}
 
