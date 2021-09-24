@@ -18,6 +18,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatStepperModule} from '@angular/material/stepper';
 import {HttpClientModule} from "@angular/common/http";
 import { FormsModule } from '@angular/forms';
+import { VolsComponent } from './vols/vols.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     MenuComponent,
     AchatBilletComponent,
     ReservationsComponent,
+    VolsComponent,
   ],
   imports: [
     FormsModule,
@@ -40,7 +43,8 @@ import { FormsModule } from '@angular/forms';
     MatNativeDateModule,
     MatButtonModule,
     MatCardModule,
-    MatStepperModule
+    MatStepperModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

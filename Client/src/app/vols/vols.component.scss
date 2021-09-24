@@ -1,0 +1,33 @@
+#billet {
+  margin-top: 30px;
+  text-align: center;
+
+}
+
+.bloc {
+  display: inline-block;
+  position: center;
+  margin-right: 5px;
+
+}
+.bloc-b {
+  text-align: center;
+}
+
+.content {
+  text-align: center;
+
+}
+
+.example-card {
+  max-width: 60%;
+  text-align: center;
+  margin-left: 18%;
+  margin-top: 10px;
+  box-shadow: blue;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+}
